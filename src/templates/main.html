@@ -157,9 +157,9 @@
                     <div class="col-md-12">
                     {% for category in vital_articles.keys() %}
                         {% for subcategory in vital_articles[category].keys() %}
-                        <div class="col-md-12">
+                        <!--<div class="col-md-12">
                             <h4> {{ subcategory }} </h4>
-                        </div>
+                        </div>-->
                             {% for page_title, quality_category, num_links, image_link in vital_articles[category][subcategory] %}
                             
                             <div class="col-sm-6 col-md-4">
@@ -194,9 +194,9 @@
                             <!--h3> {{ category }} </h3-->
                         </div>
                             {% for subcategory in vital_articles[category].keys() %}
-                            <div class="col-md-12">
+                            <!--<div class="col-md-12">
                                 <h4> {{ subcategory }} </h4>
-                            </div>
+                            </div>-->
                                 {% for page_title, quality_category, num_links, image_link in vital_articles[category][subcategory] %}
                                 <div class="col-sm-6 col-md-4">
                                 <div class="thumbnail article-card">
