@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>navlink-recommendation tool</title>
+    <title>Wikipedia Suggestions</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -151,11 +151,23 @@
                             <h4> {{ subcategory }} </h4>
                         </div>
                             {% for page_title, quality_category, num_links in vital_articles[category][subcategory] %}
-                            <div style="font-size:16px"  class="col-md-3 qc_display_{{ quality_category }}">
+                            
+                            <div class="col-sm-6 col-md-4">
+                            <div class="thumbnail">
+                              <img src="..." alt="...">
+                              <div class="caption">
+                                <h3>{{ page_title.replace('_',' ') }}</h3>
+                                <p>{{ subcategory }}</p>
+                                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                              </div>
+                            </div>
+                          </div>
+                            
+                            <!--div style="font-size:16px"  class="col-md-3 qc_display_{{ quality_category }}">
             <div height="10" width="10" class = 'qc_{{ quality_category }}' style = "display:inline;"></div>
                                 <a href="/navlink-recommendation/edit/{{ page_title }}/"> {{ page_title.replace('_',' ') }} </a>
                                 <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ num_links }} links suggested" >{{ num_links }}</span>
-                            </div>
+                            </div-->
                             {% endfor %}
                         {% endfor %}
                     {% endfor %}
