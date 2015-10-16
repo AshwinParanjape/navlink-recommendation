@@ -177,9 +177,9 @@
 
                 {% for category in vital_articles.keys() %}
                     <div class="tab-pane" id = "{{ category | replace(' ', '-')}}" >
-                        <div class="col-md-12">
-                            <!--h3> {{ category }} </h3-->
-                        </div>
+                        <!--<div class="col-md-12">
+                            <h3> {{ category }} </h3>
+                        </div>-->
                             {% for subcategory in vital_articles[category].keys() %}
                             <!--<div class="col-md-12">
                                 <h4> {{ subcategory }} </h4>
