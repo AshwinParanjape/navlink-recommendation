@@ -115,10 +115,13 @@ class navlinkRecommender():
         cursor = self.toolsdb.query(u"SELECT page_title, quality_category, num_links, category, subcategory FROM vital_pages where num_links > 0 order by num_links desc")
         vital_articles = {}
         for page_title, quality_category, num_links, category, subcategory in cursor:
-            if category not in vital_articles:
-                vital_articles[category] = defaultdict(list)
-            vital_articles[category][subcategory].append((page_title, quality_category, num_links))
+            category_name = category.split('(')[0]
+            if category_name not in vital_articles:
+
+                vital_articles[category_name] = defaultdict(list)
+            vital_articles[category_name][subcategory].append((page_title, quality_category, num_links))
         return vital_articles
+
     def wikiSearch(self, search_text):
         search_url_prefix = "https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&srlimit=50&srsearch="
         response = urllib2.urlopen(search_url_prefix+search_text.encode('utf-8').replace(' ', '_'))
