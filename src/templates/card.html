@@ -1,6 +1,9 @@
 <div class="col-sm-6 col-md-4">
     <div class="thumbnail article-card">
           <div class="display-image" style="background-image:url('{{ image_link }}')">
+              {% if quality_category=="FA" %}
+        <div class="featuredTag">FEATURED</div>
+                {% endif %}
          
          </div>
       
@@ -17,7 +20,7 @@
         
         <div class="row">
             <div class="col-md-6 missingTopics" >
-                {{ num_links }}
+                {{ num_links }} Missing links
             </div>
             <div class="col-md-6">
                 <a  href="/navlink-recommendation/edit/{{ page_title }}/" class="editButton btn btn-sm btn-default" role="button">Edit article</a>
