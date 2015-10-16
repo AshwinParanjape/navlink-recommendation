@@ -161,21 +161,8 @@
                             <h4> {{ subcategory }} </h4>
                         </div>-->
                             {% for page_title, quality_category, num_links, image_link in vital_articles[category][subcategory] %}
+                            {% include 'card.html' %}
                             
-                            <div class="col-sm-6 col-md-4">
-                            <div class="thumbnail article-card">
-                                  <div class="display-image" style="background-image:url('{{ image_link }}')">
-                                 
-                             </div>
-                              
-                              <div class="caption">
-                                <h3>{{ page_title.replace('_',' ') }}</h3>
-                                <p>{{ subcategory }}</p>
-                                <p><a href="/navlink-recommendation/edit/{{ page_title }}/" class="btn btn-sm btn-default" role="button">Edit article</a></p>
-                                
-                              </div>
-                            </div>
-                          </div>
                             
                             <!--div style="font-size:16px"  class="col-md-3 qc_display_{{ quality_category }}">
             <div height="10" width="10" class = 'qc_{{ quality_category }}' style = "display:inline;"></div>
@@ -198,18 +185,7 @@
                                 <h4> {{ subcategory }} </h4>
                             </div>-->
                                 {% for page_title, quality_category, num_links, image_link in vital_articles[category][subcategory] %}
-                                <div class="col-sm-6 col-md-4">
-                                <div class="thumbnail article-card">
-                                  <div class="display-image" style="background-image:url('{{ image_link }}')">
-                                 
-                             </div>
-                                  <div class="caption">
-                                    <h3>{{ page_title.replace('_',' ') }}</h3>
-                                    <p>{{ subcategory }}</p>
-                                    <p><a href="/navlink-recommendation/edit/{{ page_title }}/" class="btn btn-primary" role="button">Edit article</a></p>
-                                  </div>
-                                </div>
-                              </div>
+                                {% include 'card.html' %}
                                 <!--<div style="font-size:16px"  class="col-md-3 qc_display_{{ quality_category }}">
                 <div height="10" width="10" class = 'qc_{{ quality_category }}' style = "display:inline;"></div>
                                     <a href="/navlink-recommendation/edit/{{ page_title }}/"> {{ page_title.replace('_',' ') }} </a>
