@@ -39,6 +39,7 @@ body {
     padding: 0;
     overflow: hidden;
     background: #fff;
+    position: relative;
 }
 .article-card:hover {
     box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
@@ -62,7 +63,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-    margin:5px 0px 10px 0px;
+    margin:5px 0px;
 }
 
 .article-card .metadata {
@@ -78,7 +79,7 @@ body {
     float: right;
     margin-right: 5px;
     margin-top: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #eee;
 }
 
 .article-card .quality.A .indicator.one,
@@ -126,4 +127,11 @@ text-align: right;
 .article-card .missingTopics 
 {
     line-height: 30px;
+}
+
+.featuredTag {
+    position: absolute;
+    background: rgba(255,255,255,2550.8);
+    color: #000;
+    display: inline-block;
 }
