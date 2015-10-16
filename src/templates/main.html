@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <title>Wikipedia Suggestions</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
@@ -164,12 +163,16 @@
                             {% for page_title, quality_category, num_links in vital_articles[category][subcategory] %}
                             
                             <div class="col-sm-6 col-md-4">
-                            <div class="thumbnail">
-                              <img src="..." alt="...">
+                            <div class="thumbnail article-card">
+                             <div class="display-image" background-image="<patch to image>">
+                                 
+                             </div>
+                              
                               <div class="caption">
                                 <h3>{{ page_title.replace('_',' ') }}</h3>
                                 <p>{{ subcategory }}</p>
-                                <p><a href="/navlink-recommendation/edit/{{ page_title }}/" class="btn btn-primary" role="button">Edit article</a></p>
+                                <p><a href="/navlink-recommendation/edit/{{ page_title }}/" class="btn btn-sm btn-default" role="button">Edit article</a></p>
+                                
                               </div>
                             </div>
                           </div>
@@ -196,8 +199,10 @@
                             </div>
                                 {% for page_title, quality_category, num_links in vital_articles[category][subcategory] %}
                                 <div class="col-sm-6 col-md-4">
-                                <div class="thumbnail">
-                                  <img src="..." alt="...">
+                                <div class="thumbnail article-card">
+                                  <div class="display-image" background-image="<patch to image>">
+                                 
+                             </div>
                                   <div class="caption">
                                     <h3>{{ page_title.replace('_',' ') }}</h3>
                                     <p>{{ subcategory }}</p>
