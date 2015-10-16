@@ -10,6 +10,7 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="../static/index.css">
     <!--<script src="script.js"></script>-->
     <script>
         function qc_image(){
@@ -64,12 +65,51 @@
 </script>
   </head>
   <body>
+  <div class="wiki-header">
+  <div class="container">
+      <div class="col-md-8">
+          <span class="brand-subtitle">Wikipedia</span>
+          <h3 class="brand-title">Suggestions</h3>
+      </div>
+      <div class="col-md-4">switcher here </div>
+  </div>
+  </div>
+  
+  <div class="category-switcher">
+    <div class="container">
+    <div class="col-md-12">
+
+            <!--<form class="form-inline">
+                   <a href="https://en.wikipedia.org/wiki/Wikipedia:Vital_articles"><h2 >Vital Articles </h2></a>
+              <div class="form-group">
+                <label>
+                       Filter by Article Quality: 
+                </label>
+                <div class="btn-group" data-toggle="buttons" >
+                   {% for qc_class in ['FA', 'A', 'GA', 'B', 'C', 'Start'] %}
+                  <label class="btn btn-default active">
+                    <input type="checkbox" autocomplete="off" onchange="toggle_qc('{{ qc_class }}', this.checked)" checked > <div class='qc_{{ qc_class }}'></div>
+                  </label>
+                  {% endfor %}
+                </div>
+              </div>
+            </form>-->
+            <ul class="nav nav-pills category-pills">
+                <li role="presentation" class="active"><a href="#All" data-toggle="tab">All</a></li>
+                {% for category in vital_articles.keys() %}
+                    <li role="presentation"><a href="#{{ category | replace(' ', '-') }}" data-toggle="tab">{{ category }}</a></li>
+                {% endfor %}
+            </ul>
+            </div>
+            </div>
+            </div>
   <div class = "container">
+    
+    
+     
       <div class = "row">
           <div class="col-md-12">
-             <div class="page-header">
-                <h1 class="text-center">navlink-recommender</h1>
-            </div>
+
             <p class="lead text-center">This is a tool for link recommendation in articles based on human navigational patterns</p>
         </div>
     </div>
@@ -101,30 +141,7 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-md-12">
-
-            <!--<form class="form-inline">
-                   <a href="https://en.wikipedia.org/wiki/Wikipedia:Vital_articles"><h2 >Vital Articles </h2></a>
-              <div class="form-group">
-                <label>
-                       Filter by Article Quality: 
-                </label>
-                <div class="btn-group" data-toggle="buttons" >
-                   {% for qc_class in ['FA', 'A', 'GA', 'B', 'C', 'Start'] %}
-                  <label class="btn btn-default active">
-                    <input type="checkbox" autocomplete="off" onchange="toggle_qc('{{ qc_class }}', this.checked)" checked > <div class='qc_{{ qc_class }}'></div>
-                  </label>
-                  {% endfor %}
-                </div>
-              </div>
-            </form>-->
-            <ul class="nav nav-pills">
-                <li role="presentation" class="active"><a href="#All" data-toggle="tab">All</a></li>
-                {% for category in vital_articles.keys() %}
-                    <li role="presentation"><a href="#{{ category | replace(' ', '-') }}" data-toggle="tab">{{ category }}</a></li>
-                {% endfor %}
-            </ul>
-            </div>
+        
             <div class="tab-content">
                 <div class="tab-pane active" id = "All">
                     <div class="col-md-12">
