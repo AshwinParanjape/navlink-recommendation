@@ -103,41 +103,70 @@
     <div class="row">
         <div class="col-md-12">
 
-<form class="form-inline">
-       <a href="https://en.wikipedia.org/wiki/Wikipedia:Vital_articles"><h2 >Vital Articles </h2></a>
-  <div class="form-group">
-    <label>
-           Filter by Article Quality: 
-    </label>
-    <div class="btn-group" data-toggle="buttons" >
-       {% for qc_class in ['FA', 'A', 'GA', 'B', 'C', 'Start'] %}
-      <label class="btn btn-default active">
-        <input type="checkbox" autocomplete="off" onchange="toggle_qc('{{ qc_class }}', this.checked)" checked > <div class='qc_{{ qc_class }}'></div>
-      </label>
-      {% endfor %}
-    </div>
-  </div>
-</form>
-        </div>
-        {% for category in vital_articles.keys() %}
-        <div class="col-md-12">
-            <h3> {{ category }} </h3>
-        </div>
-            {% for subcategory in vital_articles[category].keys() %}
-            <div class="col-md-12">
-                <h4> {{ subcategory }} </h4>
-            </div>
-                {% for page_title, quality_category, num_links in vital_articles[category][subcategory] %}
-                <div style="font-size:16px"  class="col-md-3 qc_display_{{ quality_category }}">
-<div height="10" width="10" class = 'qc_{{ quality_category }}' style = "display:inline;"></div>
-                    <a href="/navlink-recommendation/edit/{{ page_title }}/"> {{ page_title.replace('_',' ') }} </a>
-                    <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ num_links }} links suggested" >{{ num_links }}</span>
+            <!--<form class="form-inline">
+                   <a href="https://en.wikipedia.org/wiki/Wikipedia:Vital_articles"><h2 >Vital Articles </h2></a>
+              <div class="form-group">
+                <label>
+                       Filter by Article Quality: 
+                </label>
+                <div class="btn-group" data-toggle="buttons" >
+                   {% for qc_class in ['FA', 'A', 'GA', 'B', 'C', 'Start'] %}
+                  <label class="btn btn-default active">
+                    <input type="checkbox" autocomplete="off" onchange="toggle_qc('{{ qc_class }}', this.checked)" checked > <div class='qc_{{ qc_class }}'></div>
+                  </label>
+                  {% endfor %}
                 </div>
+              </div>
+            </form>-->
+            <ul class="nav nav-pills">
+                <li role="presentation" class="active"><a href="#All" data-toggle="tab">All</a></li>
+                {% for category in vital_articles.keys() %}
+                    <li role="presentation"><a href="#{{ category | replace(' ', '-') }}" data-toggle="tab">{{ category }}</a></li>
                 {% endfor %}
-            {% endfor %}
-        {% endfor %}
+            </ul>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane active" id = "All">
+                    <div class="col-md-12">
+                    {% for category in vital_articles.keys() %}
+                        {% for subcategory in vital_articles[category].keys() %}
+                        <div class="col-md-12">
+                            <h4> {{ subcategory }} </h4>
+                        </div>
+                            {% for page_title, quality_category, num_links in vital_articles[category][subcategory] %}
+                            <div style="font-size:16px"  class="col-md-3 qc_display_{{ quality_category }}">
+            <div height="10" width="10" class = 'qc_{{ quality_category }}' style = "display:inline;"></div>
+                                <a href="/navlink-recommendation/edit/{{ page_title }}/"> {{ page_title.replace('_',' ') }} </a>
+                                <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ num_links }} links suggested" >{{ num_links }}</span>
+                            </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endfor %}
+                    </div>
+                </div>
+
+                {% for category in vital_articles.keys() %}
+                    <div class="tab-pane" id = "{{ category | replace(' ', '-')}}" >
+                        <div class="col-md-12">
+                            <h3> {{ category }} </h3>
+                        </div>
+                            {% for subcategory in vital_articles[category].keys() %}
+                            <div class="col-md-12">
+                                <h4> {{ subcategory }} </h4>
+                            </div>
+                                {% for page_title, quality_category, num_links in vital_articles[category][subcategory] %}
+                                <div style="font-size:16px"  class="col-md-3 qc_display_{{ quality_category }}">
+                <div height="10" width="10" class = 'qc_{{ quality_category }}' style = "display:inline;"></div>
+                                    <a href="/navlink-recommendation/edit/{{ page_title }}/"> {{ page_title.replace('_',' ') }} </a>
+                                    <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ num_links }} links suggested" >{{ num_links }}</span>
+                                </div>
+                                {% endfor %}
+                            {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-</div>
 </div>
 <script> qc_image() </script>
   </body>
