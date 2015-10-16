@@ -161,11 +161,11 @@
                         <div class="col-md-12">
                             <h4> {{ subcategory }} </h4>
                         </div>
-                            {% for page_title, quality_category, num_links in vital_articles[category][subcategory] %}
+                            {% for page_title, quality_category, num_links, image_link in vital_articles[category][subcategory] %}
                             
                             <div class="col-sm-6 col-md-4">
                             <div class="thumbnail">
-                              <img src="..." alt="...">
+                              <img src="{{ image_link }} " alt="{{ page_title.replace('_',' ') }}">
                               <div class="caption">
                                 <h3>{{ page_title.replace('_',' ') }}</h3>
                                 <p>{{ subcategory }}</p>
@@ -194,10 +194,10 @@
                             <div class="col-md-12">
                                 <h4> {{ subcategory }} </h4>
                             </div>
-                                {% for page_title, quality_category, num_links in vital_articles[category][subcategory] %}
+                                {% for page_title, quality_category, num_links, image_link in vital_articles[category][subcategory] %}
                                 <div class="col-sm-6 col-md-4">
                                 <div class="thumbnail">
-                                  <img src="..." alt="...">
+                                    <img src="{{ image_link }} " alt="{{ page_title.replace('_',' ') }}">
                                   <div class="caption">
                                     <h3>{{ page_title.replace('_',' ') }}</h3>
                                     <p>{{ subcategory }}</p>

@@ -112,14 +112,14 @@ class navlinkRecommender():
         return [{'id':mid, 'source': source, 'target': target, 'expected_clickthrough': float(path_count)/source_count, 'related_pages': most_common_path.split('|')[1:-1]} for mid, source, target, path_count, source_count, most_common_path in cursor]
 
     def get_vital_articles(self):
-        cursor = self.toolsdb.query(u"SELECT page_title, quality_category, num_links, category, subcategory FROM vital_pages where num_links > 0 order by num_links desc")
+        cursor = self.toolsdb.query(u"SELECT page_title, quality_category, num_links, category, subcategory, image_link FROM vital_pages where num_links > 0 order by num_links desc")
         vital_articles = {}
-        for page_title, quality_category, num_links, category, subcategory in cursor:
+        for page_title, quality_category, num_links, category, subcategory, image_link in cursor:
             category_name = category.split('(')[0]
             if category_name not in vital_articles:
 
                 vital_articles[category_name] = defaultdict(list)
-            vital_articles[category_name][subcategory].append((page_title, quality_category, num_links))
+            vital_articles[category_name][subcategory].append((page_title, quality_category, num_links, image_link))
         return vital_articles
 
     def wikiSearch(self, search_text):
