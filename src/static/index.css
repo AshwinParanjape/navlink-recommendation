@@ -36,7 +36,7 @@ body {
 }
 
 .article-card {
-    padding: 0;
+    padding: 10;
     overflow: hidden;
     background: #fff;
     position: relative;
@@ -51,7 +51,7 @@ body {
 
 .article-card .display-image {
     overflow: hidden;
-    height: 200px;
+    height: 100px;
     background: #f5f5f5;
     background-size: cover;
     background-position: 50% 30%;

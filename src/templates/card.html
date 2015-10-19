@@ -1,31 +1,40 @@
-<div class="col-sm-6 col-md-4">
+<div class="col-sm-6 col-md-6">
     <div class="thumbnail article-card">
-          <div class="display-image" style="background-image:url('{{ image_link }}')">
-              {% if quality_category=="FA" %}
-        <div class="featuredTag">FEATURED</div>
-                {% endif %}
-         
-         </div>
-      
-      <div class="caption">
-        <h3>{{ page_title.replace('_',' ') }}</h3>
-        <div class="row metadata">
-            <div class="col-md-6 category">{{ subcategory }}</div>
-            <div class="col-md-6 quality {{ quality_category }}">
-                <div class="indicator three"></div>
-                <div class="indicator two"></div>
-                <div class="indicator one"></div>
-            </div>
-        </div>
-        
         <div class="row">
-            <div class="col-md-6 missingTopics" >
-                {{ num_links }} Missing links
+            <div class="col-md-3">
+                <div class="display-image" style="background-image:url('{{ image_link }}')">
+                    {% if quality_category=="FA" %}
+                    <div class="featuredTag">FEATURED</div>
+                    {% endif %}
+                </div>                 
             </div>
-            <div class="col-md-6">
-                <a  href="/navlink-recommendation/edit/{{ page_title }}/" class="editButton btn btn-sm btn-default" role="button">Edit article</a>
+            <div class="col-md-9">
+                <div class="caption">
+                    <h3>{{ page_title.replace('_',' ') }}</h3>
+                    <div class="row metadata"> <!-- {{ subcategory }}-->
+                       
+                        <div class="col-md-6 category">{{ num_links }} Missing links</div>
+                        <div class="col-md-6 quality {{ quality_category }}">
+                            <div class="indicator three"></div>
+                            <div class="indicator two"></div>
+                            <div class="indicator one"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 missingTopics" >
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <a  href="/navlink-recommendation/edit/{{ page_title }}/" class="editButton btn btn-sm btn-default" role="button">Edit article</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-      </div>
+
+        </div>
+
+
+
     </div>
-</div>
 </div>
