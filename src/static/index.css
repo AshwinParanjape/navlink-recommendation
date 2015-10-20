@@ -1,6 +1,6 @@
 body {
     font-family: "Avenir Next", "Helvetica Neue", sans-serif;
-    background-color: #f5f5f5;
+    background-color: #fff;
 }
 .not-recommended{
     display:none;
@@ -22,7 +22,7 @@ body {
 
 .category-switcher {
     padding: 15px 0px;
-    background: #f5f5f5;
+    
 }
 
 .category-pills li a{
@@ -31,35 +31,42 @@ body {
 
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover,
 .category-pills li.active a{
-    background: #fff;
+    background: #EAF3FF;
     color: #000;
 }
 
 .article-card {
-    padding: 0;
+    padding: 10px;
     overflow: hidden;
     background: #fff;
     position: relative;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    margin-bottom: 20px;
 }
 .article-card:hover {
     box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
 }
 
 .article-card .caption {
-    padding:10px 15px;
+ 
 }
 
 .article-card .display-image {
     overflow: hidden;
-    height: 200px;
+    height: 130px;
     background: #f5f5f5;
     background-size: cover;
     background-position: 50% 30%;
+    border-radius: 3px;
+    box-shadow: inset 0px 0px 2px rgba(0,0,0,0.2);
     
 }
 
 .article-card h3 {
     width: 100%;
+    font-size: 21px;
+    
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -69,14 +76,14 @@ body {
 .article-card .metadata {
     margin-bottom: 10px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #ccc;
+    
 }
 
 .article-card .indicator {
     height: 10px;
     width: 10px;
     display: inline-block;
-    float: right;
+    float: left;
     margin-right: 5px;
     margin-top: 5px;
     border: 1px solid #eee;
@@ -134,4 +141,9 @@ text-align: right;
     background: rgba(255,255,255,2550.8);
     color: #000;
     display: inline-block;
+}
+
+.bottomBar {
+    margin-top: 30px;
+    
 }
