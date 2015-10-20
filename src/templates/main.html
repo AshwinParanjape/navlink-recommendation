@@ -64,7 +64,37 @@
 </script>
   </head>
   <body>
-  <div class="wiki-header">
+  
+<nav class="navbar navbar-default">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      
+      <a class="navbar-brand" href="#">Wikipedia Suggestions</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+     
+     
+      <ul class="nav navbar-nav navbar-right">
+       
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add missing links <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Translate articles</a></li>
+            <li><a href="#">Add missing topics</a></li>
+            <li><a href="#">Write new articles</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Know more</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+   
+  <!--div class="wiki-header">
   <div class="container">
       <div class="col-md-8">
           <span class="brand-subtitle">Wikipedia</span>
@@ -72,11 +102,11 @@
       </div>
       <div class="col-md-4">switcher here </div>
   </div>
-  </div>
+  </div-->
   
   <div class="category-switcher">
     <div class="container">
-    <div class="col-md-12">
+    
 
             <!--<form class="form-inline">
                    <a href="https://en.wikipedia.org/wiki/Wikipedia:Vital_articles"><h2 >Vital Articles </h2></a>
@@ -99,7 +129,7 @@
                     <li role="presentation"><a href="#{{ category | replace(' ', '-') }}" data-toggle="tab">{{ category }}</a></li>
                 {% endfor %}
             </ul>
-            </div>
+            
             </div>
             </div>
   <div class = "container">
@@ -154,43 +184,30 @@
         
             <div class="tab-content">
                 <div class="tab-pane active" id = "All">
-                    <div class="col-md-12">
+                   
+                    
                     {% for category in vital_articles.keys() %}
                         {% for subcategory in vital_articles[category].keys() %}
-                        <!--<div class="col-md-12">
-                            <h4> {{ subcategory }} </h4>
-                        </div>-->
+                        
                             {% for page_title, quality_category, num_links, image_link in vital_articles[category][subcategory] %}
                             {% include 'card.html' %}
                             
                             
-                            <!--div style="font-size:16px"  class="col-md-3 qc_display_{{ quality_category }}">
-            <div height="10" width="10" class = 'qc_{{ quality_category }}' style = "display:inline;"></div>
-                                <a href="/navlink-recommendation/edit/{{ page_title }}/"> {{ page_title.replace('_',' ') }} </a>
-                                <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ num_links }} links suggested" >{{ num_links }}</span>
-                            </div-->
+                            
                             {% endfor %}
                         {% endfor %}
                     {% endfor %}
-                    </div>
+                    
                 </div>
 
                 {% for category in vital_articles.keys() %}
                     <div class="tab-pane" id = "{{ category | replace(' ', '-')}}" >
-                        <!--<div class="col-md-12">
-                            <h3> {{ category }} </h3>
-                        </div>-->
+                        
                             {% for subcategory in vital_articles[category].keys() %}
-                            <!--<div class="col-md-12">
-                                <h4> {{ subcategory }} </h4>
-                            </div>-->
+                            
                                 {% for page_title, quality_category, num_links, image_link in vital_articles[category][subcategory] %}
                                 {% include 'card.html' %}
-                                <!--<div style="font-size:16px"  class="col-md-3 qc_display_{{ quality_category }}">
-                <div height="10" width="10" class = 'qc_{{ quality_category }}' style = "display:inline;"></div>
-                                    <a href="/navlink-recommendation/edit/{{ page_title }}/"> {{ page_title.replace('_',' ') }} </a>
-                                    <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ num_links }} links suggested" >{{ num_links }}</span>
-                                </div>-->
+                                
                                 {% endfor %}
                             {% endfor %}
                     </div>
@@ -198,6 +215,11 @@
             </div>
         </div>
     </div>
+<!--<div class="col-md-12">
+                            <h4> {{ subcategory }} </h4>
+                        </div>-->
 </div>
+
+
 <script> qc_image() </script>
   </body>
