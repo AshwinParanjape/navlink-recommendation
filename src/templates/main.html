@@ -49,7 +49,7 @@
                 }
                 result_html+='<div class="col-md-12 '+num_link_class+'"><a href="/navlink-recommendation/edit/'+result['page_link']+'"><h4>'+result['title']+' <span class= "badge" data-placement="right" title="{{ num_links }} links suggested">'+result['num_links']+' </span></h4></a><p>'+result['snippet']+'</p></div>';
             }
-            $("#search-results").html(result_html);
+            $("#All").html(result_html);
         });
         
         
@@ -65,12 +65,12 @@
   </head>
   <body>
   
-<nav class="navbar navbar-default">
-  <div class="container">
+<nav class="navbar navbar-default topBar">
+  <div class="container ">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       
-      <a class="navbar-brand" href="#">Wikipedia Suggestions</a>
+      <a class="navbar-brand" href="#"><span class="logo"></span>Wikipedia Suggestions</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -89,100 +89,46 @@
             <li><a href="#">Know more</a></li>
           </ul>
         </li>
+        <li><a href="#">Login</a></li>
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
    
-  <!--div class="wiki-header">
-  <div class="container">
-      <div class="col-md-8">
-          <span class="brand-subtitle">Wikipedia</span>
-          <h3 class="brand-title">Suggestions</h3>
-      </div>
-      <div class="col-md-4">switcher here </div>
-  </div>
-  </div-->
-  
-  <div class="category-switcher">
-    <div class="container">
-    
+    <div class="col-intro">
+        <div class="container">
+        <h1> Add missing links</h1>
+        <p class="page-desc">Find missing links in popular articles on Wikipedia and quickly add them. <br />This will improve experience for other readers.</p>
+        </div>
+    </div>
 
-            <!--<form class="form-inline">
-                   <a href="https://en.wikipedia.org/wiki/Wikipedia:Vital_articles"><h2 >Vital Articles </h2></a>
-              <div class="form-group">
-                <label>
-                       Filter by Article Quality: 
-                </label>
-                <div class="btn-group" data-toggle="buttons" >
-                   {% for qc_class in ['FA', 'A', 'GA', 'B', 'C', 'Start'] %}
-                  <label class="btn btn-default active">
-                    <input type="checkbox" autocomplete="off" onchange="toggle_qc('{{ qc_class }}', this.checked)" checked > <div class='qc_{{ qc_class }}'></div>
-                  </label>
-                  {% endfor %}
-                </div>
-              </div>
-            </form>-->
-            <ul class="nav nav-pills category-pills">
-                <li role="presentation" class="active"><a href="#All" data-toggle="tab">All</a></li>
-                {% for category in vital_articles.keys() %}
-                    <li role="presentation"><a href="#{{ category | replace(' ', '-') }}" data-toggle="tab">{{ category }}</a></li>
-                {% endfor %}
-            </ul>
-            
-            </div>
-            </div>
   <div class = "container">
     
-    
-    
-    <!--- search -->
      
-      <!--div class = "row">
-          <div class="col-md-12">
+    
+    
 
-            <p class="lead text-center">This is a tool for link recommendation in articles based on human navigational patterns</p>
+
+    <div class="row ">
+            <div class="col-md-3 col-sidebar">
+             <ul class="nav nav-pills category-pills">
+                <li role="presentation" class="active {{ category }}"><a href="#All" data-toggle="tab">All</a></li>
+                {% for category in vital_articles.keys() %}
+                    <li role="presentation" class="{{ category }}"><a href="#{{ category | replace(' ', '-') }}" data-toggle="tab">{{ category }}</a></li>
+                {% endfor %}
+            </ul>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="input-group">
-              <input id="search_text" type="text" class="form-control" placeholder="Search for articles ...">
+            <div class="tab-content col-md-9 col-main">
+                <div class="searchArticle">
+                    
+                     <div class="input-group">
+              <input id="search_text" type="text" class="form-control" placeholder="Search for articles">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button" onclick="refresh_search()">Go!</button>
+                <button class="btn btn-default" type="button" onclick="refresh_search()">Search</button>
               </span>
             </div>
-        </div>
-    </div-->
-    
-        <!--div class="row">
-        <div class="col-md-4 col-md-offset-8">
-            <div class="btn-group pull-right" data-toggle="buttons" >
-                  <label class="btn btn-default">
-                    <input class="pull-right" type="checkbox" autocomplete="off" 
-        onchange="show_zero_recommendations(this.checked)"
-        > Articles with no recommendations</input>
-                  </label>
-                        
-            </div>
-        </div>
-    </div-->
-    
-   <!--  search end -->
-    
-    
-    
-    
-    
-
-    <div id = "search-results" class="row">
-            
-                
-    </div>
-
-    <div class="row">
-        
-            <div class="tab-content">
+                </div>
                 <div class="tab-pane active" id = "All">
                    
                     
@@ -191,9 +137,6 @@
                         
                             {% for page_title, quality_category, num_links, image_link in vital_articles[category][subcategory] %}
                             {% include 'card.html' %}
-                            
-                            
-                            
                             {% endfor %}
                         {% endfor %}
                     {% endfor %}
@@ -219,6 +162,28 @@
                             <h4> {{ subcategory }} </h4>
                         </div>-->
 </div>
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add links to 
+                    </h4>
+                  </div>
+                  <div class="modal-body">
+                    <iframe src="edit_test.html"></iframe>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
 <script> qc_image() </script>
