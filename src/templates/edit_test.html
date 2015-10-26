@@ -9,16 +9,16 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='editor.css') }}">
+
   </head>
   <body>
-	 <iframe style="position: absolute; height: 100%; border: none ;width:100%;" src="https://en.wikipedia.org/wiki/{{ article }}?veaction=edit"></iframe>
+	 <iframe id="VEframe" frameBorder="0" class="VEframe" src="https://en.wikipedia.org/wiki/{{ article }}?veaction=edit"></iframe>
 	<div  id="sidebar">
-		<h4 class="text-center"> Suggestions </h4>
-		<div id="suggestions" class="panel-group">
+		<div id="suggestions" class="panel-group" style="width:500px;">
 
 		    {% for item in recommendations %}
               <div class="panel panel-default">
-				<div class='panel-heading' style="white-space:normal" role="button" data-toggle="collapse" data-parent="#suggestions" data-target="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}"  >
+				<div class='panel-heading' style="width:200px; float:left;" role="button" data-toggle="collapse" data-parent="#suggestions" data-target="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}"  >
 <table style="width:100%"><tr><td>
                         <a href="https://en.wikipedia.org/wiki/{{ item.target }}" target="_blank">
                             {{ item.target.replace('_',' ') }}
@@ -60,5 +60,10 @@
 		    {% endfor %}
 		</div>
 	</div>
+	<script type="text/javascript">
+    $('#VEframe').contents().find('#mw-head').css({
+            background : 'red'
+        });
+    </script>
  </body>
 </html>
