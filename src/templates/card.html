@@ -1,31 +1,27 @@
-<div class="col-sm-6 col-md-4">
-    <div class="thumbnail article-card">
-          <div class="display-image" style="background-image:url('{{ image_link }}')">
-              {% if quality_category=="FA" %}
-        <div class="featuredTag">FEATURED</div>
-                {% endif %}
-         
-         </div>
-      
-      <div class="caption">
+<div class="article-card">
+    <div class="col-md-3 display-image" style="background-image:url('{{ image_link }}')">
+        {% if quality_category=="FA" %}
+        <div class="featuredTag"></div>
+        {% endif %}
+    </div>                 
+    <div class="col-md-9 caption">
+
         <h3>{{ page_title.replace('_',' ') }}</h3>
-        <div class="row metadata">
-            <div class="col-md-6 category">{{ subcategory }}</div>
-            <div class="col-md-6 quality {{ quality_category }}">
-                <div class="indicator three"></div>
-                <div class="indicator two"></div>
-                <div class="indicator one"></div>
-            </div>
+        <div class="metadata"> <!-- {{ subcategory }}-->
+            {{ num_links }} Missing links
         </div>
-        
-        <div class="row">
-            <div class="col-md-6 missingTopics" >
-                {{ num_links }} Missing links
+
+        <div class="row bottomBar">
+            <div class="col-md-6" >
+                <div class="quality {{ quality_category }}">
+                    <div class="indicator one"></div>
+                    <div class="indicator two"></div>
+                    <div class="indicator three"></div>
+                </div>
             </div>
             <div class="col-md-6">
-                <a  href="/navlink-recommendation/edit/{{ page_title }}/" class="editButton btn btn-sm btn-default" role="button">Edit article</a>
+                <a class="editButton btn btn-sm btn-default" data-title="{{ page_title }}"  data-id="/navlink-recommendation/edit/{{ page_title }}/" role="button" data-toggle="modal" data-target="#myModal">Add links</a>
             </div>
-      </div>
+        </div>
     </div>
-</div>
 </div>

@@ -92,6 +92,9 @@ class navlinkRecommender():
 
 
     def getRecommendationsForSource(self, source, k=None):
+        if source is None:
+            return []
+
         if k is None:
             cursor = self.toolsdb.query(u"SELECT id, source, target, path_count, source_count, most_common_path FROM marginal_gains where source='{0}'".format(source))
         else:
@@ -108,18 +111,41 @@ class navlinkRecommender():
         return [x for x in recommendations if x['target'] not in existing_links]
 
     def getTopRecommendations(self, k):
+        if k is None:
+            k = 30
         cursor = self.toolsdb.query(u"SELECT id, source, target, path_count, source_count, most_common_path FROM marginal_gains limit {0}".format(k))
         return [{'id':mid, 'source': source, 'target': target, 'expected_clickthrough': float(path_count)/source_count, 'related_pages': most_common_path.split('|')[1:-1]} for mid, source, target, path_count, source_count, most_common_path in cursor]
 
     def get_vital_articles(self):
         cursor = self.toolsdb.query(u"SELECT page_title, quality_category, num_links, category, subcategory, image_link FROM vital_pages where num_links > 0 order by num_links desc")
         vital_articles = {}
+        category_name_map = {
+                "Health and medicine": "Medicine", 
+                "Arts and culture": "Art & Culture", 
+                "People": "People", 
+                "Science" : "Science",
+                "Everyday life" : "Everyday", 
+                "Philosophy and religion" : "Philosophy", 
+                "Society and social sciences": "Society", 
+                "Mathematics": "Mathematics", 
+                "History": "History", 
+                "Technology": "Science", 
+                "Geography": "Geography", 
+                }
         for page_title, quality_category, num_links, category, subcategory, image_link in cursor:
-            category_name = category.split('(')[0]
+            category_name = category_name_map[category.split('(')[0].strip()]
+            subcategory_name = subcategory.split('(')[0].strip()
             if category_name not in vital_articles:
 
                 vital_articles[category_name] = defaultdict(list)
-            vital_articles[category_name][subcategory].append((page_title, quality_category, num_links, image_link))
+            if sum([len(x) for x in vital_articles[category_name].itervalues()])<=30:
+                vital_articles[category_name][subcategory_name].append((page_title, quality_category, num_links, image_link))
+        cursor = self.toolsdb.query(u"SELECT page_title, quality_category, num_links, category, subcategory, image_link FROM vital_pages where num_links > 0 order by num_links desc limit 30")
+        vital_articles["All"] = defaultdict(list)
+        for page_title, quality_category, num_links, category, subcategory, image_link in cursor:
+            subcategory_name = subcategory.split('(')[0].strip()
+            vital_articles["All"][subcategory_name].append((page_title, quality_category, num_links, image_link))
+
         return vital_articles
 
     def wikiSearch(self, search_text):

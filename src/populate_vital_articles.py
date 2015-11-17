@@ -1,10 +1,20 @@
 import urllib2
 import re
 from itertools import izip
+import json
 vital_articles_url = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&format=json&rvprop=content&titles=Wikipedia%3AVital_articles"
 response = urllib2.urlopen(vital_articles_url)
 wikitext = response.read()
-
+def get_image_url(page_name):
+    try:
+        prop_image_url = "https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=500&titles="
+        response = urllib2.urlopen(prop_image_url+page_name).read()
+        json_response = json.loads(response)
+        pages = json_response['query']['pages']
+        return pages[pages.keys()[0]]['thumbnail']['source']
+    except:
+        return None
+    
 def pairwise(iterable):
     "s -> (s0,s1), (s2,s3), (s4, s5), ..."
     a = iter(iterable)
@@ -60,8 +70,12 @@ for k in vital_articles.keys():
         for title, qc in vital_articles[k][k1]:
             total+=1
             print k, k1, title, qc
+            image_link = get_image_url(title)
+            print image_link
             #print u'INSERT INTO vital_pages (category, subcategory, page_title, quality_category) VALUES ("{0}", "{1}", "{2}", "{3}")'.format(k, k1, title, qc)
-            toolsdb.query(u'INSERT INTO vital_pages (category, subcategory, page_title, quality_category) VALUES ("{0}", "{1}", "{2}", "{3}")'.format(k, k1, title, qc))
+            count = [count for count in toolsdb.query(u'select count(*) from marginal_gains where source="{0}"'.format(title))][0][0]
+            print count
+            toolsdb.query(u'INSERT INTO vital_pages (category, subcategory, page_title, quality_category, image_link, num_links) VALUES ("{0}", "{1}", "{2}", "{3}", "{4}", "{5}")'.format(k, k1, title, qc, image_link, count))
 
 toolsdb.db_connection.commit()
 

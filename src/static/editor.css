@@ -14,19 +14,29 @@ input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
 }
 #sidebar{
     position: fixed; 
-    height: 400px; 
+    height: 150px; 
     left: 0; 
-    top: 160px; 
-    width: 11em; 
+    top: 400px; 
+    width: 1000px; 
     padding-top:1em; 
     margin-left:1em; 
     background-color:white;
-    overflow-y:scroll;
+    overflow-x:scroll;
     padding-top:0px;
     border:2px solid; 
     border-color:#555;
 }
 .panel-body {
         padding: 5px;
+}
+
+
+
+.VEframe {
+    width: 1175px;
+    height:400px;
+    position: absolute;
+    left: -177px;
+    border: none !important;
 }
 
