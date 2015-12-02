@@ -1,9 +1,10 @@
-from flask import Flask, request, Response, jsonify, render_template
+from flask import Flask, request, Response, jsonify, render_template, current_app
 #from navlinkRecommender import navlinkRecommender
 from werkzeug.debug import DebuggedApplication
 import json
 import urllib2
 import urllib
+from functools import wraps
 
 from collections import defaultdict
 
@@ -15,6 +16,20 @@ import mysql.connector as mariadb
 import replica_cnf as replica_cnf
 import sys
 #mariadb_connection = mariadb.connect(option_files='/etc/mysql/connectors.cnf', database='s52641__recommendations')
+
+def jsonp(func):
+    """Wraps JSONified output for JSONP requests."""
+    @wraps(func)
+    def decorated_function(*args, **kwargs):
+        callback = request.args.get('callback', False)
+        if callback:
+            data = str(func(*args, **kwargs).data)
+            content = str(callback) + '(' + data + ')'
+            mimetype = 'application/javascript'
+            return current_app.response_class(content, mimetype=mimetype)
+        else:
+            return func(*args, **kwargs)
+    return decorated_function
 
 class reconnectingDB():
     def __init__(self,db_options):
@@ -31,6 +46,8 @@ class reconnectingDB():
             self.connect()
             cursor = self.db_connection.cursor()
             cursor.execute(sql)
+        except mariadb.ProgrammingError:
+            cursor.close()
         return cursor
 
     def __del__(self):
@@ -92,7 +109,7 @@ class navlinkRecommender():
 
 
     def getRecommendationsForSource(self, source, k=None):
-        if source is None:
+        if source is "None":
             return []
 
         if k is None:
@@ -108,6 +125,8 @@ class navlinkRecommender():
 
         recommendations =  [{'id': mid, 'source': source, 'target': target, 'expected_clickthrough': float(path_count)/source_count, 'related_pages': most_common_path.split('|')[1:-1]} for mid, source, target, path_count, source_count, most_common_path in cursor if target not in existing_links]
         
+        cursor.close()
+        existing_links_cursor.close()
         return [x for x in recommendations if x['target'] not in existing_links]
 
     def getTopRecommendations(self, k):
@@ -177,6 +196,7 @@ def home():
     #return Response("""Navlink-recommendation Tool Usage\n * Top k -- /topk/<k>/\n * All recommendations for a source -- /<article>/\n * Top k recommendations for a source -- /<article>/<k>/\n * Edit an article -- /edit/<article>""",  content_type='text/plain')
 
 @app.route('/search/source/<article>/')
+@jsonp
 def source_search(article):
     return jsonify(recommenderObj.searchSource(article))
 
@@ -190,10 +210,12 @@ def getTopK(k):
     return jsonify(recommendations = recommenderObj.getTopRecommendations(k))
 
 @app.route('/<article>/')
+@jsonp
 def getSource(article):
     return jsonify(recommendations = recommenderObj.getRecommendationsForSource(article))
 
 @app.route('/<article>/<int:k>/')
+@jsonp
 def getSourceTopK(article, k):
     return jsonify(recommendations = recommenderObj.getRecommendationsForSource(article,k))
 
